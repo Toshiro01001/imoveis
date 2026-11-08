@@ -179,7 +179,7 @@ input[type="radio"] { accent-color: var(--cerrado); width: 20px; height: 20px; m
 .campo-dupla { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 @media (max-width: 400px) { .campo-dupla { grid-template-columns: 1fr; } }
 @media (max-width: 380px) { .marca { font-size: 1.15rem; gap: 8px; } .marca-sinal { width: 26px; height: 26px; } .menu-botao { padding: 8px 10px; } }
-.campo-erro { color: var(--telha-texto); font-weight: 600; margin: 0; padding: 10px 12px; border-left: 3px solid var(--telha); background: var(--branco); border-radius: 0 var(--raio-campo) var(--raio-campo) 0; }
+.campo-erro { color: var(--telha-texto); font-weight: 600; margin: 0; padding: 10px 12px; border: 1px solid var(--telha); background: var(--branco); border-radius: var(--raio-campo); }
 .campo-erro[hidden] { display: none; }
 .campo-invalido { border-color: var(--telha) !important; box-shadow: 0 0 0 2px rgba(184, 92, 56, 0.25); }
 
@@ -274,7 +274,7 @@ input[type="radio"] { accent-color: var(--cerrado); width: 20px; height: 20px; m
 .fin-grafico-legenda li::before { content: ""; display: inline-block; width: 14px; height: 4px; border-radius: 2px; margin-right: 8px; vertical-align: middle; }
 .fin-grafico-legenda .leg-price::before { background: var(--ceu-texto); }
 .fin-grafico-legenda .leg-sac::before { background: var(--cerrado); }
-.fin-aviso { grid-column: 1 / -1; margin: 0; font-size: 0.95rem; color: var(--cinza); border-left: 3px solid var(--ceu); padding-left: 12px; }
+.fin-aviso { grid-column: 1 / -1; margin: 0; font-size: 0.95rem; color: var(--cinza); border: 1px solid var(--ceu); border-radius: var(--raio-campo); padding: 10px 12px; }
 @media (max-width: 960px) { .fin-grade { grid-template-columns: 1fr; gap: 28px; } }
 @media (max-width: 560px) { .fin-resultado { grid-template-columns: 1fr; } }
 
