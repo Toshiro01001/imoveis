@@ -42,7 +42,7 @@ O estudo completo está em [`docs/identidade.md`](docs/identidade.md), inclusive
 - **Forma:** o "canto de telhado", um único canto grande arredondado no alto à direita de cartões, formulários e da foto do hero. É a silhueta de uma casa com beiral.
 - **Fontes:** Alegreya Sans nos títulos e preços (humanista, traço caligráfico, lembra letreiro pintado) e Source Sans 3 no texto e nos formulários (neutra, ótima em tela pequena). As duas são locais, em `fonts/`, com licença SIL OFL.
 - **Movimento:** só um momento orquestrado na abertura (a foto se revela e o texto sobe) e respostas às ações. Com "reduzir movimento" ligado no aparelho, nada se mexe.
-- **Imagens:** a foto do hero e as fotos dos imóveis são provisórias, geradas em Python nas cores da identidade, até eu trocar pelas fotos finais.
+- **Imagens:** a foto do hero é uma foto gerada por IA no Canva (ilustrativa, não é uma obra real). As fotos dos 14 imóveis ainda são provisórias, geradas em Python nas cores da identidade, até eu trocar pelas fotos finais.
 
 ## Como funciona por dentro (em linguagem comum)
 

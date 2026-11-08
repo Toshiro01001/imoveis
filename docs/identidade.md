@@ -64,7 +64,7 @@ Regra de peso: 700 só em títulos e preços (Alegreya). No texto, o 600 é o m�
 
 ## Imagem forte
 
-A imagem forte do hero é uma **fotografia** (ver a seção "Foto do hero" abaixo), em proporção 4:3, com o canto de telhado no alto à direita. Enquanto a foto não existe, `img/hero.webp` é uma composição abstrata gerada em Python (Pillow) nas cores da identidade: céu, horizonte de cerrado e três volumes claros com o mesmo canto de telhado.
+A imagem forte do hero é uma **fotografia** (ver a seção "Foto do hero" abaixo), em proporção 4:3, com o canto de telhado no alto à direita. A foto atual de `img/hero.webp` foi gerada por IA no Canva (ilustrativa, não é uma obra real), 1440 x 1080px, sem texto.
 
 As fotos dos 14 imóveis (`img/imovel-01.webp` a `imovel-14.webp`, 800x600) também são composições provisórias geradas com Pillow, variando por tipo (casa, apartamento, terreno, sala comercial), para a sessão principal substituir depois.
 
