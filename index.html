@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'self'; form-action 'none'">
+  <title>Varanda Imóveis | Imóveis em Cuiabá, escolhidos por quem mora aqui</title>
+  <meta name="description" content="Site de demonstração de uma imobiliária fictícia de Cuiabá: busca de imóveis com filtros, comparador, simulador de financiamento e agendamento de visita. Feito pela Mil e Uma Linhas!.">
+  <meta name="theme-color" content="#1F4D3A">
+  <link rel="canonical" href="https://toshiro01001.github.io/imoveis/">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="fonts/alegreya-sans-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/source-sans-3-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+  <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+
+  <p class="faixa-demo">Demonstração da <a href="https://mileumalinhas.com.br">Mil e Uma Linhas!</a> com dados fictícios: imobiliária, imóveis, bairros e preços são inventados.</p>
+
+  <header class="topo">
+    <div class="miolo topo-miolo">
+      <a class="marca" href="#inicio" aria-label="Varanda Imóveis, início">
+        <svg class="marca-sinal" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+          <path d="M3 14 L16 4 L29 14 V29 H3 Z" fill="currentColor"/>
+          <path d="M3 14 L16 4 L29 14 H3 Z" fill="#B85C38"/>
+          <rect x="7" y="18" width="18" height="2.5" fill="#F1EEE6"/>
+          <rect x="8" y="20.5" width="2" height="8.5" fill="#F1EEE6"/>
+          <rect x="15" y="20.5" width="2" height="8.5" fill="#F1EEE6"/>
+          <rect x="22" y="20.5" width="2" height="8.5" fill="#F1EEE6"/>
+        </svg>
+        <span class="marca-nome">Varanda Imóveis</span>
+      </a>
+      <button class="menu-botao" id="menu-botao" type="button" aria-expanded="false" aria-controls="menu">
+        <span class="menu-botao-traco" aria-hidden="true"></span>
+        <span class="menu-botao-texto">Menu</span>
+      </button>
+      <nav class="menu" id="menu" aria-label="Seções do site">
+        <ul>
+          <li><a href="#imoveis">Imóveis</a></li>
+          <li><a href="#comparar">Comparar</a></li>
+          <li><a href="#financiamento">Financiamento</a></li>
+          <li><a href="#visita">Agendar visita</a></li>
+          <li><a href="#como-funciona">Como funciona</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <section class="hero" id="inicio" aria-labelledby="hero-titulo">
+      <div class="miolo hero-miolo">
+        <div class="hero-texto">
+          <h1 id="hero-titulo">Imóveis em Cuiabá, escolhidos por quem mora aqui.</h1>
+          <p class="hero-frase">Somos uma imobiliária pequena, de bairro. Visitamos cada casa antes de anunciar e falamos o preço de verdade. Comece dizendo onde quer morar.</p>
+          <form class="hero-busca" id="hero-busca" novalidate>
+            <div class="campo">
+              <label for="hb-bairro">Bairro</label>
+              <select id="hb-bairro" name="bairro">
+                <option value="">Todos os bairros</option>
+              </select>
+            </div>
+            <div class="campo">
+              <label for="hb-tipo">Tipo de imóvel</label>
+              <select id="hb-tipo" name="tipo">
+                <option value="">Qualquer tipo</option>
+                <option value="casa">Casa</option>
+                <option value="apartamento">Apartamento</option>
+                <option value="terreno">Terreno</option>
+                <option value="comercial">Sala comercial</option>
+              </select>
+            </div>
+            <button class="botao botao-destaque" type="submit">Ver imóveis</button>
+          </form>
+          <p class="hero-nota"><span id="hero-total">14</span> imóveis à venda em 6 bairros. Todos visitados pela nossa equipe.</p>
+        </div>
+        <figure class="hero-figura">
+          <img class="hero-foto" src="img/hero.webp" width="1600" height="1200" alt="Casa térrea com varanda ampla em fim de tarde, com o cerrado ao fundo" fetchpriority="high">
+          <figcaption class="hero-legenda">Casa térrea no Jardim Mangueiral, uma das 14 à venda.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="secao" id="imoveis" aria-labelledby="imoveis-titulo">
+      <div class="miolo">
+        <div class="secao-cabeca">
+          <h2 id="imoveis-titulo">Imóveis à venda</h2>
+          <p>Filtre por bairro, tipo, quartos e preço. Toque em "Comparar" em até três imóveis para vê-los lado a lado.</p>
+        </div>
+        <form class="filtros" id="filtros" novalidate aria-label="Filtros da busca">
+          <div class="campo campo-largo">
+            <label for="f-texto">Buscar por palavra</label>
+            <input id="f-texto" name="texto" type="search" placeholder="piscina, varanda, código VA-105" autocomplete="off">
+          </div>
+          <div class="campo">
+            <label for="f-bairro">Bairro</label>
+            <select id="f-bairro" name="bairro">
+              <option value="">Todos</option>
+            </select>
+          </div>
+          <div class="campo">
+            <label for="f-tipo">Tipo</label>
+            <select id="f-tipo" name="tipo">
+              <option value="">Todos</option>
+              <option value="casa">Casa</option>
+              <option value="apartamento">Apartamento</option>
+              <option value="terreno">Terreno</option>
+              <option value="comercial">Sala comercial</option>
+            </select>
+          </div>
+          <div class="campo">
+            <label for="f-quartos">Quartos</label>
+            <select id="f-quartos" name="quartos">
+              <option value="0">Tanto faz</option>
+              <option value="1">1 ou mais</option>
+              <option value="2">2 ou mais</option>
+              <option value="3">3 ou mais</option>
+              <option value="4">4 ou mais</option>
+            </select>
+          </div>
+          <div class="campo">
+            <label for="f-faixa">Preço</label>
+            <select id="f-faixa" name="faixa"></select>
+          </div>
+          <div class="campo">
+            <label for="f-ordem">Ordenar por</label>
+            <select id="f-ordem" name="ordem">
+              <option value="relevancia">Mais recentes</option>
+              <option value="preco-asc">Menor preço</option>
+              <option value="preco-desc">Maior preço</option>
+              <option value="area-desc">Maior área</option>
+              <option value="m2-asc">Menor preço por m²</option>
+            </select>
+          </div>
+          <button class="botao botao-leve" type="reset" id="f-limpar">Limpar filtros</button>
+        </form>
+        <p class="resultado-conta" id="resultado-conta" aria-live="polite">14 imóveis encontrados.</p>
+        <ul class="lista-imoveis" id="lista-imoveis"></ul>
+      </div>
+    </section>
+
+    <section class="secao secao-folha" id="comparar" aria-labelledby="comparar-titulo">
+      <div class="miolo">
+        <div class="secao-cabeca">
+          <h2 id="comparar-titulo">Comparar imóveis</h2>
+          <p>Até três imóveis lado a lado. O melhor valor de cada linha fica marcado em verde.</p>
+        </div>
+        <div class="comparar-vazio" id="comparar-vazio">
+          <p>Nenhum imóvel escolhido ainda. Na lista acima, toque em "Comparar" nos imóveis que quer ver lado a lado.</p>
+          <a class="botao botao-leve" href="#imoveis">Ir para a lista</a>
+        </div>
+        <div class="comparar-area" id="comparar-area" hidden>
+          <div class="tabela-rolagem">
+            <table class="comparar-tabela" id="comparar-tabela">
+              <caption class="visualmente-oculto">Comparação dos imóveis escolhidos</caption>
+              <thead><tr id="comparar-cabecalho"></tr></thead>
+              <tbody id="comparar-corpo"></tbody>
+            </table>
+          </div>
+          <p class="comparar-nota" id="comparar-nota" aria-live="polite"></p>
+          <button class="botao botao-leve" type="button" id="comparar-limpar">Tirar todos da comparação</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="secao" id="financiamento" aria-labelledby="fin-titulo">
+      <div class="miolo fin-grade">
+        <div class="fin-texto">
+          <h2 id="fin-titulo">Simule a parcela</h2>
+          <p>Informe o valor do imóvel, quanto você dá de entrada e em quantos anos quer pagar. Mostramos a parcela nos dois sistemas que os bancos usam.</p>
+          <form class="fin-form" id="fin-form" novalidate>
+            <div class="campo">
+              <label for="fin-valor">Valor do imóvel (R$)</label>
+              <input id="fin-valor" name="valor" type="text" inputmode="numeric" value="520.000" autocomplete="off">
+            </div>
+            <div class="campo">
+              <label for="fin-entrada">Entrada (R$)</label>
+              <input id="fin-entrada" name="entrada" type="text" inputmode="numeric" value="104.000" autocomplete="off">
+              <span class="campo-ajuda" id="fin-entrada-pct">20% do valor</span>
+            </div>
+            <div class="campo">
+              <label for="fin-prazo">Prazo: <output id="fin-prazo-saida" for="fin-prazo">30 anos</output></label>
+              <input id="fin-prazo" name="prazo" type="range" min="5" max="35" step="1" value="30">
+            </div>
+            <div class="campo">
+              <label for="fin-taxa">Juros ao ano (%)</label>
+              <input id="fin-taxa" name="taxa" type="number" min="1" max="30" step="0.1" value="10.5">
+            </div>
+            <p class="campo-erro" id="fin-erro" role="alert" hidden></p>
+          </form>
+        </div>
+        <div class="fin-resultado" id="fin-resultado" aria-live="polite">
+          <div class="fin-cartao fin-price">
+            <h3>Tabela Price</h3>
+            <p class="fin-rotulo">Parcela fixa do início ao fim</p>
+            <p class="fin-valor-grande" id="price-parcela">R$ 0</p>
+            <dl class="fin-detalhes">
+              <div><dt>Financiado</dt><dd id="price-financiado">R$ 0</dd></div>
+              <div><dt>Total pago</dt><dd id="price-total">R$ 0</dd></div>
+              <div><dt>Juros no período</dt><dd id="price-juros">R$ 0</dd></div>
+              <div><dt>Renda familiar mínima</dt><dd id="price-renda">R$ 0</dd></div>
+            </dl>
+          </div>
+          <div class="fin-cartao fin-sac">
+            <h3>Tabela SAC</h3>
+            <p class="fin-rotulo">Parcela que começa maior e cai todo mês</p>
+            <p class="fin-valor-grande"><span id="sac-primeira">R$ 0</span> <span class="fin-ate">até</span> <span id="sac-ultima">R$ 0</span></p>
+            <dl class="fin-detalhes">
+              <div><dt>Financiado</dt><dd id="sac-financiado">R$ 0</dd></div>
+              <div><dt>Total pago</dt><dd id="sac-total">R$ 0</dd></div>
+              <div><dt>Juros no período</dt><dd id="sac-juros">R$ 0</dd></div>
+              <div><dt>Renda familiar mínima</dt><dd id="sac-renda">R$ 0</dd></div>
+            </dl>
+          </div>
+          <div class="fin-grafico" id="fin-grafico"></div>
+          <p class="fin-aviso">Isto é uma simulação. Não inclui seguros, taxas de administração nem correção pela TR, e a taxa real depende da análise do banco. Use como ponto de partida, não como proposta.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="secao secao-folha" id="visita" aria-labelledby="visita-titulo">
+      <div class="miolo visita-grade">
+        <div class="visita-texto">
+          <h2 id="visita-titulo">Agende uma visita</h2>
+          <p>Escolha o imóvel, o dia e o horário. Um corretor nosso vai com você e responde o que quiser saber. Nesta demonstração nada é enviado: o resumo aparece aqui na tela.</p>
+          <ul class="visita-lista">
+            <li>Visitamos de segunda a sábado, das 9h às 17h.</li>
+            <li>Você pode combinar duas visitas no mesmo dia.</li>
+            <li>Sem compromisso e sem taxa.</li>
+          </ul>
+        </div>
+        <form class="visita-form" id="visita-form" novalidate>
+          <div class="campo">
+            <label for="v-imovel">Imóvel</label>
+            <select id="v-imovel" name="imovel" required>
+              <option value="">Escolha um imóvel</option>
+            </select>
+          </div>
+          <div class="campo-dupla">
+            <div class="campo">
+              <label for="v-data">Dia</label>
+              <input id="v-data" name="data" type="date" required>
+            </div>
+            <div class="campo">
+              <label for="v-hora">Horário</label>
+              <select id="v-hora" name="hora" required>
+                <option value="">Escolha</option>
+              </select>
+            </div>
+          </div>
+          <div class="campo">
+            <label for="v-nome">Seu nome</label>
+            <input id="v-nome" name="nome" type="text" autocomplete="name" required>
+          </div>
+          <div class="campo">
+            <label for="v-fone">Telefone com DDD</label>
+            <input id="v-fone" name="fone" type="tel" inputmode="tel" placeholder="(65) 9 9999-9999" autocomplete="tel" required>
+          </div>
+          <fieldset class="campo campo-opcoes">
+            <legend>Como prefere o contato</legend>
+            <label><input type="radio" name="contato" value="WhatsApp" checked> WhatsApp</label>
+            <label><input type="radio" name="contato" value="Ligação"> Ligação</label>
+          </fieldset>
+          <div class="campo">
+            <label for="v-obs">Alguma observação? <span class="opcional">(opcional)</span></label>
+            <textarea id="v-obs" name="obs" rows="2" maxlength="200"></textarea>
+          </div>
+          <p class="campo-erro" id="v-erro" role="alert" hidden></p>
+          <button class="botao botao-destaque" type="submit">Confirmar visita simulada</button>
+        </form>
+        <div class="visita-resumo" id="visita-resumo" hidden tabindex="-1">
+          <h3>Visita combinada (simulação)</h3>
+          <dl class="resumo-lista" id="visita-resumo-lista"></dl>
+          <p class="resumo-nota">Nenhuma mensagem foi enviada e nenhum corretor foi avisado: este site é uma demonstração. Em um site real, você receberia a confirmação no WhatsApp.</p>
+          <button class="botao botao-leve" type="button" id="visita-outra">Agendar outra visita</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="secao" id="sobre" aria-labelledby="sobre-titulo">
+      <div class="miolo sobre-grade">
+        <div>
+          <h2 id="sobre-titulo">Quem somos</h2>
+          <p>A Varanda nasceu em 2016 numa casa de esquina do Jardim Mangueiral, onde ainda atendemos. Somos três corretores e uma assistente. Trabalhamos só com imóveis que visitamos, anunciamos o preço pedido pelo dono e dizemos quando achamos que está caro.</p>
+        </div>
+        <dl class="sobre-dados">
+          <div><dt>Endereço</dt><dd>Rua das Mangueiras, 410, Jardim Mangueiral, Cuiabá (fictício)</dd></div>
+          <div><dt>Telefone</dt><dd>(65) 0000-0000 (fictício)</dd></div>
+          <div><dt>Horário</dt><dd>Segunda a sexta, 8h às 18h. Sábado, 8h às 12h.</dd></div>
+          <div><dt>CRECI</dt><dd>Número fictício para demonstração</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="secao secao-escura" id="como-funciona" aria-labelledby="cf-titulo">
+      <div class="miolo">
+        <div class="secao-cabeca">
+          <h2 id="cf-titulo">Como isto funciona</h2>
+          <p>Este site é uma demonstração da Mil e Uma Linhas!, de Cuiabá. Abaixo, o que ele faz, como faz e os detalhes para quem programa.</p>
+        </div>
+        <div class="cf-grade">
+          <div>
+            <h3>O que o site faz</h3>
+            <p>Mostra os imóveis de uma imobiliária de bairro e deixa você filtrar, comparar até três lado a lado, calcular a parcela do financiamento e combinar uma visita. Tudo acontece na hora, no seu celular ou computador, sem carregar outra página.</p>
+          </div>
+          <div>
+            <h3>Como funciona por dentro</h3>
+            <p>A lista de imóveis está escrita dentro do próprio site, num arquivo de dados. Quando você filtra ou ordena, o navegador percorre essa lista e redesenha os cartões. O simulador aplica as fórmulas da Tabela Price e do SAC, as mesmas dos bancos. O agendamento confere os campos e monta o resumo. Nada é enviado para a internet e nada fica guardado no aparelho.</p>
+          </div>
+          <div>
+            <h3>O que é fictício</h3>
+            <p>Tudo. A Varanda Imóveis não existe, os bairros foram inventados, os preços, as fotos, os corretores, o telefone e o endereço também. Nenhuma visita é marcada e nenhuma proposta é feita.</p>
+          </div>
+        </div>
+        <details class="cf-tecnico">
+          <summary>Detalhes técnicos</summary>
+          <ul>
+            <li>HTML, CSS e JavaScript puros. Sem framework, sem biblioteca, sem CDN, sem fonte externa, sem analytics.</li>
+            <li>Dados em <code>js/dados.js</code> (14 imóveis, 6 bairros fictícios). A busca filtra por texto, bairro, tipo, quartos mínimos e faixa de preço, e ordena por preço, área ou preço por m².</li>
+            <li>Simulador: Price com <code>P = V · i / (1 − (1 + i)^−n)</code>; SAC com amortização constante <code>V / n</code> e juros sobre o saldo. Taxa mensal obtida da anual por capitalização composta: <code>i = (1 + a)^(1/12) − 1</code>. Renda mínima considera parcela de até 30% da renda.</li>
+            <li>Comparador guarda até três ids em memória; a tabela é gerada por DOM, sem <code>innerHTML</code> com dados do visitante.</li>
+            <li>Agendamento valida data (a partir de amanhã, sem domingo), horário, nome e telefone com DDD; o corretor do resumo é escolhido de forma determinística pelo id do imóvel.</li>
+            <li><code>Content-Security-Policy</code> por meta tag: <code>default-src 'self'</code>, sem script inline, sem atributo <code>style</code>, <code>connect-src 'none'</code>, <code>form-action 'none'</code>.</li>
+            <li>Sem <code>localStorage</code>, cookies ou qualquer gravação no aparelho. Recarregar a página zera tudo.</li>
+            <li>Acessibilidade: contraste AA, foco visível, <code>aria-live</code> nos resultados, botões de comparar com <code>aria-pressed</code>, <code>prefers-reduced-motion</code> respeitado.</li>
+            <li>Testes com Playwright em <code>tests/site.cjs</code> (1280x900, iPhone 13 e 320px).</li>
+          </ul>
+        </details>
+      </div>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <div class="miolo rodape-miolo">
+      <p><strong>Varanda Imóveis</strong> é uma imobiliária fictícia. Site de demonstração feito pela <a href="https://mileumalinhas.com.br">Mil e Uma Linhas!</a>, Cuiabá, Mato Grosso.</p>
+      <p>Nenhum dado sai deste navegador. Fontes Alegreya Sans e Source Sans 3, licença SIL OFL.</p>
+    </div>
+  </footer>
+
+  <script src="js/dados.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
