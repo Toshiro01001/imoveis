@@ -37,7 +37,7 @@ Nada. Não há `localStorage`, `sessionStorage`, cookies nem IndexedDB. O teste 
 
 ## Dependências
 
-Nenhuma em produção. O site usa apenas HTML, CSS e JavaScript escritos à mão e duas fontes locais (Alegreya Sans e Source Sans 3, licença SIL OFL, arquivos de licença em `fonts/`). O Playwright é usado só nos testes, fora do site. As imagens provisórias foram geradas com Pillow fora do repositório.
+Nenhuma em produção. O site usa apenas HTML, CSS e JavaScript escritos à mão e duas fontes locais (Alegreya Sans e Source Sans 3, licença SIL OFL, arquivos de licença em `fonts/`). O Playwright é usado só nos testes, fora do site. A foto do hero e as cinco fotos das seções são geradas por IA no Canva; as fotos dos 14 imóveis continuam ilustrações provisórias geradas com Pillow fora do repositório. Todas ficam como arquivos webp locais em `img/`.
 
 ## Dados no repositório
 
@@ -49,3 +49,18 @@ O repositório é público. Conferido: não há senhas, chaves de API, tokens, e
 2. O simulador de financiamento pode ser lido como proposta. Mitigado pelo aviso ao lado do resultado (não inclui seguros, taxas nem TR; a taxa depende do banco).
 3. Meta tag de CSP não cobre `frame-ancestors`; o site pode ser colocado em um iframe por terceiros. Sem impacto prático, porque não há sessão nem ação sensível a sequestrar.
 4. O GitHub Pages serve os cabeçalhos HTTP que quiser; não controlamos HSTS nem cabeçalhos de segurança além do que cabe na meta tag.
+
+## Revisão de 08/11/2026 (leva final de design)
+
+Revisão feita depois de aplicar os design systems da leva final e encaixar as fotos geradas por IA no Canva.
+
+- **CSP:** a política do `index.html` é a mesma de antes da leva (conferida linha a linha). Continua sem `unsafe-inline`, sem `unsafe-eval` e sem origem externa.
+- **Script e estilo inline:** nenhum `<script>` inline, nenhum `<style>` e nenhum atributo `style` nas páginas. Os efeitos novos mudam só classes, `textContent` e propriedades CSS pelo CSSOM, que a CSP permite.
+- **Recursos externos:** nenhum script, fonte, imagem ou folha de estilo de fora. Os únicos links externos são de navegação comum (mileumalinhas.com.br e o perfil do GitHub).
+- **Bibliotecas:** nenhuma entrou. Movimento, vidro, contadores e revelação ao rolar são CSS e JavaScript escritos à mão, desligados com `prefers-reduced-motion`.
+- **innerHTML:** nenhum uso no JavaScript.
+- **eval e Function:** nenhum uso.
+- **Armazenamento:** o site não grava nada no navegador.
+- **Dados pessoais:** nenhum dado pessoal real entrou. Pessoas, empresas, telefones e endereços seguem fictícios. As fotos não retratam pessoas reais.
+- **Imagens:** arquivos webp locais em `img/`, com `width`/`height`, `loading="lazy"` e `decoding="async"`. Nenhuma é carregada de outro domínio.
+- **Testes:** `tests/site.cjs` passa em 1280x900, iPhone 13 e 320px, sem erro de console e sem rolagem horizontal.

@@ -89,3 +89,36 @@ Para as fotos dos imóveis, se forem geradas: mesma luz e mesmo estilo, 800x600,
 ## O que evitamos de propósito
 
 Azul-marinho com dourado de imobiliária; fundo creme com serif e terracota; preto com verde ácido; cartões iguais com sombra; rótulos em caixa alta; numeração 01/02/03 sem sequência; setas em links; gradientes de enfeite; pontos centrais separando metadados. O único gradiente do site é o céu da imagem provisória, que será trocada pela foto.
+
+## Design systems aplicados (leva final)
+
+Na leva final o site ganhou superfície, botões, cartões, faixas, rodapé, movimento e fotos de seção a partir de dois design systems do catálogo da Mil e Uma Linhas!. A paleta não mudou: o esmeralda do Spectra e o teal do Glass Green viraram Céu no preenchimento (um botão por tela) e Folha nas superfícies, e o canto de telhado continua em todo cartão, formulário e foto.
+
+**Dupla:** Spectra Design System (claro) e Glass Green Design System (escuro).
+
+**Como misturei:** as seções em Areia e Folha (imóveis, comparar, financiamento, visita, quem somos) seguem o Spectra: vidro branco a 60% com desfoque, índice de seção, cartões de mídia com título sobre a foto, pílulas de status, hotspots no gráfico, sanfona e rodapé em quatro colunas. As seções escuras (hero em Cerrado, "Como isto funciona" e rodapé em Carvão) seguem o Glass Green: duas luzes ambientes em CSS, painel de brilho, cartões que sobem e inclinam no hover, barra de estatísticas congelada sobre a foto e títulos com brilho.
+
+**Componentes e onde estão:**
+
+| Componente | De | Onde |
+|---|---|---|
+| Vidro claro (branco 60%, desfoque 12px, canto de telhado 28px, escala 1.01 no hover) | Spectra | Busca do hero e barra de filtros |
+| Índice de seção (chip em Source Sans 3 600 12px + traço de 32px) | Spectra | Acima do h2 de Imóveis ("14 imóveis"), Comparar ("3 vagas"), Financiamento ("Price e SAC"), Visita ("Segunda a sábado") e Como funciona ("Demonstração") |
+| Cartão de aplicação (foto no topo, fade de Cerrado 90%, bairro sobre a foto, foto escala 1.05 em 700ms) | Spectra | Cartões de imóvel gerados por `js/app.js` |
+| Pílula de status com ponto pulsando | Spectra | Canto da foto de cada cartão ("Visitado pela equipe" ou "Novo esta semana") e foto do hero |
+| Hotspot com halo e dica de vidro | Spectra | Gráfico do simulador: início e fim das linhas Price e SAC, com o valor da parcela no toque, foco ou mouse |
+| Sanfona (grid-rows 0fr para 1fr em 500ms, mais e menos cruzando) | Spectra | "Perguntas antes da visita" em Agende uma visita e "Detalhes técnicos" em Como isto funciona; uma aberta por vez |
+| Botão escuro sólido (contorno Cerrado que preenche no hover, seta anda 4px) | Spectra | Botões secundários das seções claras; o botão Céu ganha só um brilho leve no hover |
+| Rodapé em quatro colunas com linha legal | Spectra | Rodapé em Carvão |
+| Luzes ambientes (Céu 10% e Folha 8%, desfoque 40px e 60px, 8s e 10s) | Glass Green | Hero e Como isto funciona |
+| Cartão com brilho (sobe 8px, inclina 2 graus, brilho de 60px) | Glass Green | Três blocos de Como isto funciona e foto do hero (só com mouse) |
+| Painel de brilho (gradiente 135 graus) | Glass Green | Bloco de texto do hero |
+| Barra de estatísticas congelada | Glass Green | Base da foto do hero ("Jardim Mangueiral", "3 quartos", "160 m²") |
+| Texto com brilho | Glass Green | h1 do hero e h2 de Como isto funciona |
+| Entradas ao rolar (slideUp 30px em .8s, scaleIn nos cartões do simulador, 100ms entre irmãos) | Glass Green | Cartões de imóvel (primeira carga), cartões Price e SAC, formulário de visita e dados de Quem somos |
+
+**Exceções conscientes às regras da identidade:** os brilhos do Glass Green (no hover dos cartões, no botão Céu e o `text-shadow` dos títulos escuros) são luz, não sombra de elevação, e só aparecem sobre fundo escuro ou no hover; o painel de brilho e as luzes ambientes são os únicos gradientes, sempre em transparência baixa. A barra do hero usa traços finos entre os dados em vez de pontos centrais.
+
+**Fotos de seção:** geradas por IA no Canva, ilustrativas, em `img/`: `sede-casa-esquina.webp` (Quem somos, 4:3), `equipe-corretores.webp` (Quem somos, 3:2), `visita-varanda.webp` (Agende uma visita, 4:5), `financiamento-chaves.webp` (Simule a parcela, 16:9) e `bairro-rua.webp` (fundo de Como isto funciona, 16:9, sob véu de Carvão a 78%).
+
+**Movimento e desempenho:** tudo em CSS e um `IntersectionObserver`; sem WebGL, sem biblioteca e sem script de terceiros. As animações mexem só em `transform` e `opacity`. Com "reduzir movimento" ligado, nada se mexe, as entradas ao rolar não escondem nada e as luzes ficam paradas. Inclinação e escala no hover só existem em aparelhos com mouse.

@@ -75,8 +75,16 @@
           <p class="hero-nota"><span id="hero-total">14</span> imóveis à venda em 6 bairros. Todos visitados pela nossa equipe.</p>
         </div>
         <figure class="hero-figura">
-          <img class="hero-foto" src="img/hero.webp" width="1440" height="1080" alt="Casa térrea com varanda ampla e telhado verde no fim da tarde, com o cerrado ao fundo. Imagem gerada por IA, ilustrativa." fetchpriority="high">
-          <figcaption class="hero-legenda">Casa térrea no Jardim Mangueiral, uma das 14 à venda.</figcaption>
+          <img class="hero-foto" src="img/hero.webp" width="1440" height="1080" alt="Casa térrea com varanda ampla e telhado verde no fim da tarde, com o cerrado ao fundo. Imagem gerada por IA, ilustrativa." fetchpriority="high" decoding="async">
+          <span class="pilula-status hero-pilula"><span class="pilula-ponto" aria-hidden="true"></span>Visitado pela equipe</span>
+          <figcaption class="hero-stats">
+            <span class="visualmente-oculto">Casa térrea à venda:</span>
+            <ul>
+              <li>Jardim Mangueiral</li>
+              <li>3 quartos</li>
+              <li>160 m²</li>
+            </ul>
+          </figcaption>
         </figure>
       </div>
     </section>
@@ -84,6 +92,7 @@
     <section class="secao" id="imoveis" aria-labelledby="imoveis-titulo">
       <div class="miolo">
         <div class="secao-cabeca">
+          <p class="secao-indice"><span class="indice-chip">14 imóveis</span><span class="indice-traco" aria-hidden="true"></span></p>
           <h2 id="imoveis-titulo">Imóveis à venda</h2>
           <p>Filtre por bairro, tipo, quartos e preço. Toque em "Comparar" em até três imóveis para vê-los lado a lado.</p>
         </div>
@@ -142,12 +151,13 @@
     <section class="secao secao-folha" id="comparar" aria-labelledby="comparar-titulo">
       <div class="miolo">
         <div class="secao-cabeca">
+          <p class="secao-indice"><span class="indice-chip">3 vagas</span><span class="indice-traco" aria-hidden="true"></span></p>
           <h2 id="comparar-titulo">Comparar imóveis</h2>
           <p>Até três imóveis lado a lado. O melhor valor de cada linha fica marcado em verde.</p>
         </div>
         <div class="comparar-vazio" id="comparar-vazio">
           <p>Nenhum imóvel escolhido ainda. Na lista acima, toque em "Comparar" nos imóveis que quer ver lado a lado.</p>
-          <a class="botao botao-leve" href="#imoveis">Ir para a lista</a>
+          <a class="botao botao-leve" href="#imoveis">Ir para a lista <svg class="botao-seta" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
         </div>
         <div class="comparar-area" id="comparar-area" hidden>
           <div class="tabela-rolagem">
@@ -166,8 +176,12 @@
     <section class="secao" id="financiamento" aria-labelledby="fin-titulo">
       <div class="miolo fin-grade">
         <div class="fin-texto">
+          <p class="secao-indice"><span class="indice-chip">Price e SAC</span><span class="indice-traco" aria-hidden="true"></span></p>
           <h2 id="fin-titulo">Simule a parcela</h2>
           <p>Informe o valor do imóvel, quanto você dá de entrada e em quantos anos quer pagar. Mostramos a parcela nos dois sistemas que os bancos usam.</p>
+          <figure class="fin-foto">
+            <img src="img/financiamento-chaves.webp" width="1456" height="816" loading="lazy" decoding="async" alt="Molho de chaves novo sobre uma mesa de madeira clara ao lado de uma planta de imóvel dobrada e uma xícara de café, com luz de janela.">
+          </figure>
           <form class="fin-form" id="fin-form" novalidate>
             <div class="campo">
               <label for="fin-valor">Valor do imóvel (R$)</label>
@@ -190,7 +204,7 @@
           </form>
         </div>
         <div class="fin-resultado" id="fin-resultado" aria-live="polite">
-          <div class="fin-cartao fin-price">
+          <div class="fin-cartao fin-price revelar revelar-escala">
             <h3>Tabela Price</h3>
             <p class="fin-rotulo">Parcela fixa do início ao fim</p>
             <p class="fin-valor-grande" id="price-parcela">R$ 0</p>
@@ -201,7 +215,7 @@
               <div><dt>Renda familiar mínima</dt><dd id="price-renda">R$ 0</dd></div>
             </dl>
           </div>
-          <div class="fin-cartao fin-sac">
+          <div class="fin-cartao fin-sac revelar revelar-escala">
             <h3>Tabela SAC</h3>
             <p class="fin-rotulo">Parcela que começa maior e cai todo mês</p>
             <p class="fin-valor-grande"><span id="sac-primeira">R$ 0</span> <span class="fin-ate">até</span> <span id="sac-ultima">R$ 0</span></p>
@@ -221,6 +235,7 @@
     <section class="secao secao-folha" id="visita" aria-labelledby="visita-titulo">
       <div class="miolo visita-grade">
         <div class="visita-texto">
+          <p class="secao-indice"><span class="indice-chip">Segunda a sábado</span><span class="indice-traco" aria-hidden="true"></span></p>
           <h2 id="visita-titulo">Agende uma visita</h2>
           <p>Escolha o imóvel, o dia e o horário. Um corretor nosso vai com você e responde o que quiser saber. Nesta demonstração nada é enviado: o resumo aparece aqui na tela.</p>
           <ul class="visita-lista">
@@ -228,8 +243,32 @@
             <li>Você pode combinar duas visitas no mesmo dia.</li>
             <li>Sem compromisso e sem taxa.</li>
           </ul>
+          <figure class="visita-foto">
+            <img src="img/visita-varanda.webp" width="1152" height="1440" loading="lazy" decoding="async" alt="Corretora e casal vistos de costas na varanda de uma casa vazia, olhando o quintal com uma mangueira, em luz de fim de tarde.">
+          </figure>
         </div>
-        <form class="visita-form" id="visita-form" novalidate>
+        <div class="visita-perguntas sanfona" data-sanfona>
+          <h3>Perguntas antes da visita</h3>
+          <div class="sanfona-item">
+            <h4 class="sanfona-cabeca"><button class="sanfona-botao" id="sf-doc-botao" type="button" aria-expanded="false" aria-controls="sf-doc">Preciso levar documento?<span class="sanfona-icone" aria-hidden="true"></span></button></h4>
+            <div class="sanfona-painel" id="sf-doc" role="region" aria-labelledby="sf-doc-botao">
+              <div class="sanfona-conteudo"><p>Para ver o imóvel, não. Leve só um documento com foto, porque alguns prédios pedem na portaria. Comprovante de renda e certidões só entram se você decidir fazer uma proposta.</p></div>
+            </div>
+          </div>
+          <div class="sanfona-item">
+            <h4 class="sanfona-cabeca"><button class="sanfona-botao" id="sf-duas-botao" type="button" aria-expanded="false" aria-controls="sf-duas">Posso combinar duas visitas?<span class="sanfona-icone" aria-hidden="true"></span></button></h4>
+            <div class="sanfona-painel" id="sf-duas" role="region" aria-labelledby="sf-duas-botao">
+              <div class="sanfona-conteudo"><p>Pode. Agende a primeira aqui e escreva na observação o código do segundo imóvel. O corretor monta o roteiro com pelo menos uma hora entre as duas.</p></div>
+            </div>
+          </div>
+          <div class="sanfona-item">
+            <h4 class="sanfona-cabeca"><button class="sanfona-botao" id="sf-remarcar-botao" type="button" aria-expanded="false" aria-controls="sf-remarcar">E se eu precisar remarcar?<span class="sanfona-icone" aria-hidden="true"></span></button></h4>
+            <div class="sanfona-painel" id="sf-remarcar" role="region" aria-labelledby="sf-remarcar-botao">
+              <div class="sanfona-conteudo"><p>Responda a mensagem de confirmação com o novo dia. Não tem custo e você não precisa explicar o motivo.</p></div>
+            </div>
+          </div>
+        </div>
+        <form class="visita-form revelar" id="visita-form" novalidate>
           <div class="campo">
             <label for="v-imovel">Imóvel</label>
             <select id="v-imovel" name="imovel" required>
@@ -282,19 +321,31 @@
         <div>
           <h2 id="sobre-titulo">Quem somos</h2>
           <p>A Varanda nasceu em 2016 numa casa de esquina do Jardim Mangueiral, onde ainda atendemos. Somos três corretores e uma assistente. Trabalhamos só com imóveis que visitamos, anunciamos o preço pedido pelo dono e dizemos quando achamos que está caro.</p>
+          <figure class="sobre-foto">
+            <img src="img/sede-casa-esquina.webp" width="1456" height="1088" loading="lazy" decoding="async" alt="Casa de esquina de bairro em Cuiabá, com varanda de madeira clara, esquadrias verde-escuras e uma mangueira na calçada, no fim da tarde.">
+          </figure>
         </div>
-        <dl class="sobre-dados">
+        <div class="sobre-lado">
+        <figure class="equipe-foto">
+          <img src="img/equipe-corretores.webp" width="1456" height="970" loading="lazy" decoding="async" alt="Três corretores e uma assistente conversando na varanda de madeira da imobiliária, vistos de costas e de lado, com pastas e um tablet, no fim da tarde.">
+        </figure>
+        <dl class="sobre-dados revelar">
           <div><dt>Endereço</dt><dd>Rua das Mangueiras, 410, Jardim Mangueiral, Cuiabá (fictício)</dd></div>
           <div><dt>Telefone</dt><dd>(65) 0000-0000 (fictício)</dd></div>
           <div><dt>Horário</dt><dd>Segunda a sexta, 8h às 18h. Sábado, 8h às 12h.</dd></div>
           <div><dt>CRECI</dt><dd>Número fictício para demonstração</dd></div>
         </dl>
+        </div>
       </div>
     </section>
 
     <section class="secao secao-escura" id="como-funciona" aria-labelledby="cf-titulo">
+      <figure class="cf-foto">
+        <img src="img/bairro-rua.webp" width="1456" height="816" loading="lazy" decoding="async" alt="Rua arborizada de bairro residencial em Cuiabá ao entardecer, com casas térreas de muros baixos, ipês e céu limpo escurecendo.">
+      </figure>
       <div class="miolo">
         <div class="secao-cabeca">
+          <p class="secao-indice"><span class="indice-chip">Demonstração</span><span class="indice-traco" aria-hidden="true"></span></p>
           <h2 id="cf-titulo">Como isto funciona</h2>
           <p>Este site é uma demonstração da Mil e Uma Linhas!, de Cuiabá. Abaixo, o que ele faz, como faz e os detalhes para quem programa.</p>
         </div>
@@ -309,31 +360,77 @@
           </div>
           <div>
             <h3>O que é fictício</h3>
-            <p>Tudo. A Varanda Imóveis não existe, os bairros foram inventados, os preços, as fotos, os corretores, o telefone e o endereço também. Nenhuma visita é marcada e nenhuma proposta é feita.</p>
+            <p>Tudo. A Varanda Imóveis não existe, os bairros foram inventados, os preços, as fotos, os corretores, o telefone e o endereço também. As fotos das seções foram geradas por IA no Canva e são ilustrativas. Nenhuma visita é marcada e nenhuma proposta é feita.</p>
           </div>
         </div>
-        <details class="cf-tecnico">
-          <summary>Detalhes técnicos</summary>
-          <ul>
-            <li>HTML, CSS e JavaScript puros. Sem framework, sem biblioteca, sem CDN, sem fonte externa, sem analytics.</li>
-            <li>Dados em <code>js/dados.js</code> (14 imóveis, 6 bairros fictícios). A busca filtra por texto, bairro, tipo, quartos mínimos e faixa de preço, e ordena por preço, área ou preço por m².</li>
-            <li>Simulador: Price com <code>P = V · i / (1 − (1 + i)^−n)</code>; SAC com amortização constante <code>V / n</code> e juros sobre o saldo. Taxa mensal obtida da anual por capitalização composta: <code>i = (1 + a)^(1/12) − 1</code>. Renda mínima considera parcela de até 30% da renda.</li>
-            <li>Comparador guarda até três ids em memória; a tabela é gerada por DOM, sem <code>innerHTML</code> com dados do visitante.</li>
-            <li>Agendamento valida data (a partir de amanhã, sem domingo), horário, nome e telefone com DDD; o corretor do resumo é escolhido de forma determinística pelo id do imóvel.</li>
-            <li><code>Content-Security-Policy</code> por meta tag: <code>default-src 'self'</code>, sem script inline, sem atributo <code>style</code>, <code>connect-src 'none'</code>, <code>form-action 'none'</code>.</li>
-            <li>Sem <code>localStorage</code>, cookies ou qualquer gravação no aparelho. Recarregar a página zera tudo.</li>
-            <li>Acessibilidade: contraste AA, foco visível, <code>aria-live</code> nos resultados, botões de comparar com <code>aria-pressed</code>, <code>prefers-reduced-motion</code> respeitado.</li>
-            <li>Testes com Playwright em <code>tests/site.cjs</code> (1280x900, iPhone 13 e 320px).</li>
-          </ul>
-        </details>
+        <div class="cf-tecnico sanfona" data-sanfona>
+          <div class="sanfona-item">
+            <h3 class="sanfona-cabeca"><button class="sanfona-botao" id="cf-tecnico-botao" type="button" aria-expanded="false" aria-controls="cf-tecnico-painel">Detalhes técnicos<span class="sanfona-icone" aria-hidden="true"></span></button></h3>
+            <div class="sanfona-painel" id="cf-tecnico-painel" role="region" aria-labelledby="cf-tecnico-botao">
+              <div class="sanfona-conteudo">
+                <ul>
+                  <li>HTML, CSS e JavaScript puros. Sem framework, sem biblioteca, sem CDN, sem fonte externa, sem analytics.</li>
+                  <li>Dados em <code>js/dados.js</code> (14 imóveis, 6 bairros fictícios). A busca filtra por texto, bairro, tipo, quartos mínimos e faixa de preço, e ordena por preço, área ou preço por m².</li>
+                  <li>Simulador: Price com <code>P = V · i / (1 − (1 + i)^−n)</code>; SAC com amortização constante <code>V / n</code> e juros sobre o saldo. Taxa mensal obtida da anual por capitalização composta: <code>i = (1 + a)^(1/12) − 1</code>. Renda mínima considera parcela de até 30% da renda.</li>
+                  <li>Comparador guarda até três ids em memória; a tabela é gerada por DOM, sem <code>innerHTML</code> com dados do visitante.</li>
+                  <li>Agendamento valida data (a partir de amanhã, sem domingo), horário, nome e telefone com DDD; o corretor do resumo é escolhido de forma determinística pelo id do imóvel.</li>
+                  <li><code>Content-Security-Policy</code> por meta tag: <code>default-src 'self'</code>, sem script inline, sem atributo <code>style</code>, <code>connect-src 'none'</code>, <code>form-action 'none'</code>.</li>
+                  <li>Sem <code>localStorage</code>, cookies ou qualquer gravação no aparelho. Recarregar a página zera tudo.</li>
+                  <li>Efeitos visuais (luzes ambientes, vidro, cartões que inclinam, entradas ao rolar) em CSS puro e um <code>IntersectionObserver</code>; tudo desligado com <code>prefers-reduced-motion</code>.</li>
+                  <li>Acessibilidade: contraste AA, foco visível, <code>aria-live</code> nos resultados, botões de comparar com <code>aria-pressed</code>, perguntas com <code>aria-expanded</code>, <code>prefers-reduced-motion</code> respeitado.</li>
+                  <li>Testes com Playwright em <code>tests/site.cjs</code> (1280x900, iPhone 13 e 320px).</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   </main>
 
   <footer class="rodape">
-    <div class="miolo rodape-miolo">
-      <p><strong>Varanda Imóveis</strong> é uma imobiliária fictícia. Site de demonstração feito pela <a href="https://mileumalinhas.com.br">Mil e Uma Linhas!</a>, Cuiabá, Mato Grosso.</p>
-      <p>Nenhum dado sai deste navegador. Fontes Alegreya Sans e Source Sans 3, licença SIL OFL.</p>
+    <div class="miolo">
+      <div class="rodape-grade">
+        <div class="rodape-marca">
+          <p class="rodape-nome">
+            <svg class="marca-sinal" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+              <path d="M3 14 L16 4 L29 14 V29 H3 Z" fill="currentColor"/>
+              <path d="M3 14 L16 4 L29 14 H3 Z" fill="#B85C38"/>
+              <rect x="7" y="18" width="18" height="2.5" fill="#1E2622"/>
+              <rect x="8" y="20.5" width="2" height="8.5" fill="#1E2622"/>
+              <rect x="15" y="20.5" width="2" height="8.5" fill="#1E2622"/>
+              <rect x="22" y="20.5" width="2" height="8.5" fill="#1E2622"/>
+            </svg>
+            Varanda Imóveis
+          </p>
+          <p>Imóveis em Cuiabá, escolhidos por quem mora aqui. Uma imobiliária fictícia, criada para demonstração.</p>
+        </div>
+        <nav class="rodape-coluna" aria-label="Encontrar um imóvel">
+          <p class="rodape-titulo">Encontrar</p>
+          <ul>
+            <li><a href="#imoveis">Imóveis à venda</a></li>
+            <li><a href="#comparar">Comparar imóveis</a></li>
+          </ul>
+        </nav>
+        <nav class="rodape-coluna" aria-label="Decidir e visitar">
+          <p class="rodape-titulo">Decidir</p>
+          <ul>
+            <li><a href="#financiamento">Simular a parcela</a></li>
+            <li><a href="#visita">Agendar uma visita</a></li>
+          </ul>
+        </nav>
+        <nav class="rodape-coluna" aria-label="Sobre a imobiliária e o site">
+          <p class="rodape-titulo">Conhecer</p>
+          <ul>
+            <li><a href="#sobre">Quem somos</a></li>
+            <li><a href="#como-funciona">Como isto funciona</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="rodape-legal">
+        <p><strong>Varanda Imóveis</strong> é uma imobiliária fictícia. Site de demonstração feito pela <a href="https://mileumalinhas.com.br">Mil e Uma Linhas!</a>, Cuiabá, Mato Grosso.</p>
+        <p>Nenhum dado sai deste navegador. Fotos geradas por IA no Canva, ilustrativas. Fontes Alegreya Sans e Source Sans 3, licença SIL OFL.</p>
+      </div>
     </div>
   </footer>
 

@@ -46,6 +46,31 @@
   });
   $$("#menu a").forEach(function (a) { a.addEventListener("click", function () { menu.classList.remove("aberto"); menuBotao.setAttribute("aria-expanded", "false"); }); });
 
+  /* ---------- Entradas ao rolar (desligadas com "reduzir movimento") ---------- */
+  var revelaAtivo = "IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var observador = null;
+  if (revelaAtivo) {
+    document.documentElement.classList.add("revela-js");
+    observador = new IntersectionObserver(function (entradas) {
+      entradas.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add("visivel"); observador.unobserve(en.target); } });
+    }, { rootMargin: "0px 0px -15% 0px" });
+  }
+  function revelar(n) { if (observador) { observador.observe(n); } else { n.classList.add("visivel"); } }
+  $$(".revelar").forEach(revelar);
+
+  /* ---------- Perguntas em sanfona: uma aberta por vez ---------- */
+  $$("[data-sanfona]").forEach(function (grupo) {
+    grupo.classList.add("sanfona-js");
+    var botoes = $$(".sanfona-botao", grupo);
+    botoes.forEach(function (b) {
+      b.addEventListener("click", function () {
+        var abrir = b.getAttribute("aria-expanded") !== "true";
+        botoes.forEach(function (o) { o.setAttribute("aria-expanded", "false"); o.closest(".sanfona-item").classList.remove("aberto"); });
+        if (abrir) { b.setAttribute("aria-expanded", "true"); b.closest(".sanfona-item").classList.add("aberto"); }
+      });
+    });
+  });
+
   /* ---------- Preenche selects de bairro, faixa, imóvel e horário ---------- */
   ["#hb-bairro", "#f-bairro"].forEach(function (sel) {
     var s = $(sel);
@@ -92,12 +117,17 @@
   }
   function cartao(i) {
     var li = el("li", { classe: "imovel" + (comparacao.indexOf(i.id) > -1 ? " na-comparacao" : ""), "data-id": String(i.id) });
-    var img = el("img", { classe: "imovel-foto", src: "img/imovel-" + String(i.id).padStart(2, "0") + ".webp", width: "800", height: "600", loading: "lazy", alt: D.tipos[i.tipo] + " em " + bairroNome(i.bairro) + ": " + i.titulo });
+    var img = el("img", { classe: "imovel-foto", src: "img/imovel-" + String(i.id).padStart(2, "0") + ".webp", width: "800", height: "600", loading: "lazy", decoding: "async", alt: D.tipos[i.tipo] + " em " + bairroNome(i.bairro) + ": " + i.titulo });
     var corpo = el("div", { classe: "imovel-corpo" });
     var preco = el("p", { classe: "imovel-preco", texto: moeda.format(i.preco) });
     preco.appendChild(el("small", { texto: moeda.format(Math.round(i.preco / i.area)) + " por m²" }));
     var titulo = el("h3", { texto: i.titulo });
-    var local = el("p", { classe: "imovel-local" }, [el("span", { classe: "imovel-tipo", texto: D.tipos[i.tipo] }), bairroNome(i.bairro) + ", zona " + D.bairros.filter(function (b) { return b.id === i.bairro; })[0].regiao.toLowerCase() + ". Código " + i.codigo]);
+    var local = el("p", { classe: "imovel-local" }, [el("span", { classe: "imovel-tipo", texto: D.tipos[i.tipo] }), "Zona " + D.bairros.filter(function (b) { return b.id === i.bairro; })[0].regiao.toLowerCase() + ". Código " + i.codigo]);
+    var midia = el("div", { classe: "imovel-midia" });
+    var novo = i.id > D.imoveis.length - 2;
+    midia.appendChild(img);
+    midia.appendChild(el("span", { classe: "pilula-status" }, [el("span", { classe: "pilula-ponto", "aria-hidden": "true" }), novo ? "Novo esta semana" : "Visitado pela equipe"]));
+    midia.appendChild(el("p", { classe: "imovel-bairro", texto: bairroNome(i.bairro) }));
     var specs = el("ul", { classe: "imovel-specs", "aria-label": "Características" });
     if (i.quartos) { specs.appendChild(el("li", null, [svgIcone("quartos"), i.quartos + (i.quartos === 1 ? " quarto" : " quartos")])); }
     if (i.banheiros) { specs.appendChild(el("li", null, [svgIcone("banheiros"), i.banheiros + (i.banheiros === 1 ? " banheiro" : " banheiros")])); }
@@ -120,10 +150,10 @@
     bVis.addEventListener("click", function () { vImovel.value = String(i.id); rolarPara("visita"); setTimeout(function () { $("#v-data").focus({ preventScroll: true }); }, 500); });
     acoes.appendChild(bComp); acoes.appendChild(bSim); acoes.appendChild(bVis);
     [preco, titulo, local, specs, mais, acoes].forEach(function (n) { corpo.appendChild(n); });
-    li.appendChild(img); li.appendChild(corpo);
+    li.appendChild(midia); li.appendChild(corpo);
     return li;
   }
-  var ultimaAssinatura = "";
+  var ultimaAssinatura = "", primeiroDesenho = true;
   function desenharLista(forcar) {
     /* O evento "change" dispara ao sair do campo mesmo sem mudança nova; se nada mudou, não redesenha
        (um redesenho entre o toque e o soltar faria o botão sumir debaixo do dedo). */
@@ -140,7 +170,12 @@
       vazio.appendChild(b);
       lista.appendChild(vazio);
     } else {
-      res.forEach(function (i) { lista.appendChild(cartao(i)); });
+      res.forEach(function (i) {
+        var c = cartao(i);
+        if (primeiroDesenho && observador) { c.classList.add("revelar"); revelar(c); }
+        lista.appendChild(c);
+      });
+      primeiroDesenho = false;
     }
     conta.textContent = res.length === 0 ? "Nenhum imóvel encontrado." : res.length === 1 ? "1 imóvel encontrado." : res.length + " imóveis encontrados.";
   }
@@ -302,10 +337,45 @@
       p.setAttribute("fill", "none"); p.setAttribute("stroke", par[1]); p.setAttribute("stroke-width", "3"); p.setAttribute("stroke-linejoin", "round"); p.setAttribute("stroke-linecap", "round");
       svg.appendChild(p);
     });
+    /* Hotspots: início e fim de cada linha, com o valor da parcela no toque, no foco ou ao passar o mouse */
+    var pontosChave = [
+      { s: sPrice, k: 0, nome: "Price, mês 1", lado: "abaixo" },
+      { s: sPrice, k: pontos - 1, nome: "Price, último mês", lado: "acima" },
+      { s: sSac, k: 0, nome: "SAC, mês 1", lado: "direita" },
+      { s: sSac, k: pontos - 1, nome: "SAC, último mês", lado: "esquerda" }
+    ];
+    var hotspots = [];
+    pontosChave.forEach(function (pc) {
+      var x = cx(pc.k), y = cy(pc.s[pc.k]), texto = pc.nome + ": " + moedaCent.format(pc.s[pc.k]);
+      var g = document.createElementNS(ns, "g");
+      g.setAttribute("class", "hotspot"); g.setAttribute("tabindex", "0"); g.setAttribute("role", "img"); g.setAttribute("aria-label", texto);
+      var alvo = document.createElementNS(ns, "circle");
+      alvo.setAttribute("cx", x); alvo.setAttribute("cy", y); alvo.setAttribute("r", "14"); alvo.setAttribute("class", "hs-alvo");
+      var halo = document.createElementNS(ns, "circle");
+      halo.setAttribute("cx", x); halo.setAttribute("cy", y); halo.setAttribute("r", "5"); halo.setAttribute("class", "hs-halo");
+      var nucleo = document.createElementNS(ns, "circle");
+      nucleo.setAttribute("cx", x); nucleo.setAttribute("cy", y); nucleo.setAttribute("r", "5"); nucleo.setAttribute("class", "hs-nucleo");
+      nucleo.setAttribute("stroke", pc.s === sPrice ? "#155C94" : "#1F4D3A");
+      var largura = Math.round(texto.length * 6.4 + 18), altura = 24;
+      var tx0 = pc.lado === "esquerda" || pc.lado === "acima" ? x - largura - 10 : x + 10;
+      var ty0 = pc.lado === "acima" ? y - altura - 10 : pc.lado === "abaixo" ? y + 10 : y - altura / 2;
+      tx0 = Math.max(2, Math.min(W - largura - 2, tx0)); ty0 = Math.max(2, Math.min(H - altura - 2, ty0));
+      var dica = document.createElementNS(ns, "g");
+      dica.setAttribute("class", "hs-dica"); dica.setAttribute("aria-hidden", "true");
+      var caixaDica = document.createElementNS(ns, "rect");
+      caixaDica.setAttribute("x", tx0); caixaDica.setAttribute("y", ty0); caixaDica.setAttribute("width", largura); caixaDica.setAttribute("height", altura); caixaDica.setAttribute("rx", "6");
+      var t = document.createElementNS(ns, "text");
+      t.setAttribute("x", tx0 + 9); t.setAttribute("y", ty0 + 16); t.setAttribute("font-size", "12");
+      t.textContent = texto;
+      dica.appendChild(caixaDica); dica.appendChild(t);
+      [alvo, halo, nucleo, dica].forEach(function (n) { g.appendChild(n); });
+      hotspots.push(g);
+    });
     var rot = document.createElementNS(ns, "text");
     rot.setAttribute("x", W - 8); rot.setAttribute("y", H - 2); rot.setAttribute("text-anchor", "end"); rot.setAttribute("font-size", "12"); rot.setAttribute("fill", "#4C5A52");
     rot.textContent = "ano 1 até ano " + anos;
     svg.appendChild(rot);
+    hotspots.forEach(function (g) { svg.appendChild(g); });
     caixa.textContent = "";
     caixa.appendChild(svg);
     var leg = el("ul", { classe: "fin-grafico-legenda" });

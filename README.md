@@ -41,8 +41,19 @@ O estudo completo está em [`docs/identidade.md`](docs/identidade.md), inclusive
 - **Paleta:** Areia `#F1EEE6` (fundo), Branco (superfícies), Cerrado `#1F4D3A` (identidade, cabeçalho, títulos), Carvão `#1E2622` (texto), Folha `#D9E4D3` (apoio) e Céu `#6CB8EE` (destaque, um só botão por tela). A telha `#B85C38` aparece só no telhado da marca e nos erros. Fugi de propósito do azul-marinho com dourado das imobiliárias e do creme com terracota dos sites gerados.
 - **Forma:** o "canto de telhado", um único canto grande arredondado no alto à direita de cartões, formulários e da foto do hero. É a silhueta de uma casa com beiral.
 - **Fontes:** Alegreya Sans nos títulos e preços (humanista, traço caligráfico, lembra letreiro pintado) e Source Sans 3 no texto e nos formulários (neutra, ótima em tela pequena). As duas são locais, em `fonts/`, com licença SIL OFL.
-- **Movimento:** só um momento orquestrado na abertura (a foto se revela e o texto sobe) e respostas às ações. Com "reduzir movimento" ligado no aparelho, nada se mexe.
-- **Imagens:** a foto do hero é uma foto gerada por IA no Canva (ilustrativa, não é uma obra real). As fotos dos 14 imóveis ainda são provisórias, geradas em Python nas cores da identidade, até eu trocar pelas fotos finais.
+- **Movimento:** um momento orquestrado na abertura (a foto se revela e o texto sobe), blocos que sobem suavemente quando chegam na tela, luzes ambientes que flutuam devagar nas seções escuras e respostas às ações. Com "reduzir movimento" ligado no aparelho, nada se mexe.
+- **Imagens:** a foto do hero e as cinco fotos das seções são **fotos geradas por IA no Canva, ilustrativas** (não mostram imóveis, pessoas nem lugares reais). As fotos dos 14 imóveis ainda são provisórias, geradas em Python nas cores da identidade, até eu trocar pelas fotos finais.
+- **Design systems da leva final:** misturei o Spectra (claro) nas seções em Areia e Folha e o Glass Green (escuro) no hero e em "Como isto funciona". Vidro claro na busca e nos filtros, índice de seção acima dos títulos, cartões com o bairro sobre a foto e uma pílula de status, pontos no gráfico do simulador que mostram a parcela, perguntas em sanfona, luzes ambientes, cartões que inclinam no hover e rodapé em quatro colunas. A lista completa está em [`docs/identidade.md`](docs/identidade.md).
+
+### Fotos das seções (geradas por IA no Canva, ilustrativas)
+
+| Arquivo | Onde aparece | Proporção |
+|---|---|---|
+| `img/sede-casa-esquina.webp` | Quem somos, abaixo do texto | 4:3 (1456x1088) |
+| `img/equipe-corretores.webp` | Quem somos, acima dos dados de contato | 3:2 (1456x970) |
+| `img/visita-varanda.webp` | Agende uma visita, abaixo da lista | 4:5 (1152x1440) |
+| `img/financiamento-chaves.webp` | Simule a parcela, acima do formulário | 16:9 (1456x816) |
+| `img/bairro-rua.webp` | Fundo de "Como isto funciona", sob um véu escuro | 16:9 (1456x816) |
 
 ## Como funciona por dentro (em linguagem comum)
 
@@ -51,6 +62,8 @@ Pense numa pasta de anúncios muito bem organizada. Os 14 imóveis, os 6 bairros
 - **Busca:** a cada filtro trocado, o site percorre a lista e mostra só o que combina com bairro, tipo, quartos mínimos, faixa de preço e palavra digitada; depois ordena do jeito escolhido.
 - **Comparador:** guarda até três códigos de imóvel e monta a tabela. Em cada linha com número (preço, área, quartos, condomínio...), compara os valores e marca o melhor.
 - **Simulador:** usa as fórmulas da Tabela Price (parcela fixa) e do SAC (amortização constante, parcela que cai). A taxa anual vira mensal por juros compostos. O gráfico é desenhado em SVG a partir das parcelas de cada ano.
+- **Perguntas em sanfona:** cada pergunta é um botão. Ao tocar, a resposta abre deslizando e as outras fecham, para só uma ficar aberta.
+- **Efeitos de entrada:** um observador do navegador avisa quando um bloco chega perto da tela e só então ele sobe e aparece. Se o aparelho pede menos movimento, os blocos já aparecem prontos.
 - **Agendamento:** confere imóvel, dia (de amanhã a 60 dias, sem domingo), horário, nome com sobrenome e telefone com DDD, formata o telefone e monta o resumo. O corretor é escolhido pelo código do imóvel, para parecer uma agenda real.
 
 ## Detalhes técnicos
@@ -61,6 +74,7 @@ Pense numa pasta de anúncios muito bem organizada. Os 14 imóveis, os 6 bairros
 - Price: `P = V · i / (1 − (1 + i)^−n)`. SAC: amortização `V / n`, juros sobre o saldo devedor. Taxa mensal `i = (1 + a)^(1/12) − 1`. Renda mínima considera parcela de até 30% da renda.
 - Acessibilidade: contraste AA em todas as combinações da paleta, foco visível, `aria-live` na contagem de resultados e na nota do comparador, botões "Comparar" com `aria-pressed`, tabela com `caption` e `scope`, gráfico SVG com `aria-label` descritivo, erros com `role="alert"`, `lang="pt-BR"`, `prefers-reduced-motion` respeitado.
 - Celular primeiro: uma coluna a partir de 320px, duas colunas de cartões a partir de 600px, três a partir de 960px. A tabela do comparador rola na horizontal dentro da própria caixa no celular.
+- Efeitos visuais da leva final (vidro, luzes ambientes, cartões que inclinam, hotspots, sanfona, entradas ao rolar) em CSS e JavaScript próprios, sem WebGL, sem biblioteca e sem script de terceiros, mexendo só em `transform` e `opacity`.
 - Arquivos: `index.html`, `404.html` (caminhos absolutos `/imoveis/`), `robots.txt`, `sitemap.xml`, verificação do Google, `css/estilo.css`, `js/app.js`, `js/dados.js`, `img/`, `fonts/`, `docs/`, `tests/site.cjs`.
 
 ## Como rodar
